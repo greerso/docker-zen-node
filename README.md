@@ -16,7 +16,7 @@ Certbot will be installed and auto-renew your SSL certificates when required.
 
 You will need a server with at least 4GB ram (2GB memory w/ 2GB swap is generally OK) to run a ZenCash secure node. Common providers can be found here: https://horizenofficial.atlassian.net/wiki/spaces/ZEN/pages/136872080/Community+VPS+List
 
-The script is designed to run on Ubuntu 16.04
+The script is designed to run on Ubuntu 18.04
 
 You will also need a domain name that is pointing to your server (eg. zennode.example.com)
 certbot will be used to provision and maintain a valid SSL certificate for your domain.
@@ -25,8 +25,6 @@ certbot will be used to provision and maintain a valid SSL certificate for your 
 
 Invoking the script is best done on a fresh installation, however executing install script again should not
 cause any issues.
-
-*Note:* Check the [ansible installer](https://github.com/WhenLamboMoon/docker-zen-node/tree/master/ansible) if you plan on installing multiple nodes
 
 ```
 curl -O https://raw.githubusercontent.com/WhenLamboMoon/docker-zen-node/master/install.sh

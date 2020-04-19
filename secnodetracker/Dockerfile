@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:buster-slim
 
 ENV TINI_VERSION v0.16.1
 ENV NODE_ENV production

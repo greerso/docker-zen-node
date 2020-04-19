@@ -1,7 +1,7 @@
-FROM ubuntu:16.04
+FROM debian:buster-slim
 
 # Used only for triggering a rebuild
-LABEL zend="2.0.19"
+LABEL zend="2.0.20"
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install ca-certificates curl wget apt-transport-https lsb-release libgomp1 jq \
