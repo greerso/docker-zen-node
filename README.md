@@ -1,14 +1,12 @@
 # Docker Zencash Secure Node
 
-**UNFORTUNATELY I AM NO LONGER ABLE TO MAINTAIN THIS DUE TO OTHER COMMITMENTS. PLEASE OPEN AN ISSUE IF YOU ARE INTERESTED IN TAKING OVER**
-
 This repository will help you setup a zencash node with a single bash script.
 
 The script will install Docker on a fresh Ubuntu VM and provision the following
 containers:
 
-- zend https://hub.docker.com/r/whenlambomoon/zend/
-- Securenodetracker https://hub.docker.com/r/whenlambomoon/secnodetracker/
+- zend https://hub.docker.com/r/greerso/zend/
+- Securenodetracker https://hub.docker.com/r/greerso/secnodetracker/
 
 Certbot will be installed and auto-renew your SSL certificates when required.
 
@@ -27,7 +25,7 @@ Invoking the script is best done on a fresh installation, however executing inst
 cause any issues.
 
 ```
-curl -O https://raw.githubusercontent.com/WhenLamboMoon/docker-zen-node/master/install.sh
+curl -O https://raw.githubusercontent.com/greerso/docker-zen-node/master/install.sh
 chmod +x install.sh
 ./install.sh <stakeaddr> <email> <fqdn> <region> <nodetype>
 ```
@@ -158,7 +156,7 @@ To resolve this you will need to reindex your zen-node. To do this you will need
 
 ```
 systemctl stop zen-node
-docker run --rm --net=host -p 9033:9033 -p 18231:18231 -v /mnt/zen:/mnt/zen -v /etc/letsencrypt/:/etc/letsencrypt --name zen-node whenlambomoon/zend:latest zend -reindex
+docker run --rm --net=host -p 9033:9033 -p 18231:18231 -v /mnt/zen:/mnt/zen -v /etc/letsencrypt/:/etc/letsencrypt --name zen-node greerso/zend:latest zend -reindex
 ```
 
 Once it finishes reindexing you can exit and restart the zen-node normally:
