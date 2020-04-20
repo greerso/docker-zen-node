@@ -6,7 +6,9 @@ ENV ZENCONF /mnt/zen/config/zen.conf
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 
-RUN latestBaseurl="$(curl -s https://api.github.com/repos/tianon/gosu/releases | grep browser_download_url | head -n 1 | cut -d '"' -f 4 | sed 's:/[^/]*$::')" \
+RUN apt-get update \
+&& DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install curl jq gnupg \
+&& latestBaseurl="$(curl -s https://api.github.com/repos/tianon/gosu/releases | grep browser_download_url | head -n 1 | cut -d '"' -f 4 | sed 's:/[^/]*$::')" \
 && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
 && curl -o /usr/local/bin/gosu -SL "$latestBaseurl/gosu-$dpkgArch" \
 && curl -o /usr/local/bin/gosu.asc -SL "$latestBaseurl/gosu-$dpkgArch.asc" \
