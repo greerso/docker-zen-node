@@ -69,16 +69,31 @@ installdocker() {
     ca-certificates \
     curl \
     gnupg-agent \
+    lsb-release \
     software-properties-common \
     > /dev/null 2>&1
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+  apt-key fingerprint 0EBFCD88
+  add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+  apt-get update
+  apt-get -y install \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io
+    > /dev/null 2>&1
+  systemctl enable docker
+  systemctl start docker
 }
 
 installdependencies() {
   print_status "Installing packages required for setup..."
-  installdocker
-  apt install -y lsb-release unattended-upgrades dnsutils > /dev/null 2>&1
-  systemctl enable docker
-  systemctl start docker
+  apt -y install \
+  unattended-upgrades \
+  dnsutils \
+  > /dev/null 2>&1
 }
 
 createdirs() {
@@ -295,6 +310,7 @@ getzaddr() {
 
 createswap
 populateaptcache
+installdocker
 installdependencies
 createdirs
 installcertbot
