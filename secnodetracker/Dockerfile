@@ -7,7 +7,7 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 
 RUN apt-get update \
-&& DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install curl jq gnupg ca-certificates gosu \
+&& DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install curl jq gnupg ca-certificates gosu git \
 && gosu nobody true
 
 WORKDIR /home/node/
