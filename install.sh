@@ -62,30 +62,32 @@ populateaptcache() {
 
 installdocker() {
   # Install Docker
-  print_status "Installing Docker..."
-  apt -y remove docker docker-engine docker.io containerd runc > /dev/null 2>&1
-  apt -y install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    lsb-release \
-    software-properties-common \
-    > /dev/null 2>&1
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-  apt-key fingerprint 0EBFCD88
-  add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-  apt-get update
-  apt-get -y install \
-    docker-ce \
-    docker-ce-cli \
-    containerd.io
-    > /dev/null 2>&1
-  systemctl enable docker
-  systemctl start docker
+  if ! hash docker 2>/dev/null; then
+    print_status "Installing Docker..."
+    apt -y remove docker docker-engine docker.io containerd runc > /dev/null 2>&1
+    apt -y install \
+      apt-transport-https \
+      ca-certificates \
+      curl \
+      gnupg-agent \
+      lsb-release \
+      software-properties-common \
+      > /dev/null 2>&1
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+    apt-key fingerprint 0EBFCD88
+    add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+    apt-get update
+    apt-get -y install \
+      docker-ce \
+      docker-ce-cli \
+      containerd.io
+      > /dev/null 2>&1
+    systemctl enable docker
+    systemctl start docker
+  fi
 }
 
 installdependencies() {
